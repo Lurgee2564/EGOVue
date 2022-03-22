@@ -53,11 +53,12 @@
 
 import request from "@/utils/request";
 import router from "@/router/router";
-
+import jwtDecode from 'jwt-decode'
 export default {
   name:"Login",
-
+  
   data() {
+
     const checkName = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('用户名不能为空'));
@@ -83,6 +84,12 @@ export default {
       }
     };
     return {
+      token:{
+
+      },
+      state:{
+
+      },
 
       ruleForm: {
         pwd: '',
@@ -106,12 +113,12 @@ export default {
     request.post("/login",this.ruleForm).then(
           res=>{
 
-            if(res == true){
-              console.log(res)
-              router.push('/home')
-            }
-            else{
+            if(res.state===500){
               alert("账号与密码错误！")
+            }
+           if(res.state===200){
+              console.log(res.token)
+              router.push('/home')
             }
           }
       )
