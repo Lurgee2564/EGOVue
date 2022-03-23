@@ -53,6 +53,7 @@
 
 import request from "@/utils/request";
 import router from "@/router/router";
+import store from "@/store/store";
 import jwtDecode from 'jwt-decode'
 export default {
   name:"Login",
@@ -117,8 +118,9 @@ export default {
               alert("账号与密码错误！")
             }
            if(res.state===200){
-              console.log(res.token)
-              router.push('/home')
+              console.log(res.token);
+             store.commit('$_setToken',res.token);
+              router.push('/home');
             }
           }
       )

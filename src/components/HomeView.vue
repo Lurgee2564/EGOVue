@@ -37,7 +37,8 @@
                   <el-icon><avatar /></el-icon>管理员
                 </template>
 
-                  <el-menu-item index="1-1">所有管理员</el-menu-item>
+                  <el-menu-item index="1-1" @click="toAdmin">基本信息管理
+                  </el-menu-item>
                   <el-menu-item index="1-2">Option 2</el-menu-item>
 
 
@@ -48,13 +49,13 @@
                   <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
                 </el-sub-menu>
               </el-sub-menu>
-              <el-sub-menu index="2">
+              <el-sub-menu index="2" >
                 <template #title>
                   <el-icon><user-filled /></el-icon>用户管理
                 </template>
 
 
-                <el-menu-item index="2-1">Option 1</el-menu-item>
+                <el-menu-item index="2-1" @click="toUser">基本信息管理</el-menu-item>
                   <el-menu-item index="2-2">Option 2</el-menu-item>
 
 
@@ -87,7 +88,9 @@
 
         </el-aside>
         <el-main class="main">
-          <Main></Main>
+          <div>
+            <router-view></router-view>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -103,6 +106,14 @@ export default {
   components: {
     Main
 
+  },
+  methods:{
+    toUser(){
+      this.$router.push('/home/user')
+    },
+    toAdmin(){
+      this.$router.push('/home/main')
+    }
   }
 }
 </script>

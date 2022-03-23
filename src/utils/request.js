@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from "@/router/router";
 
 const request = axios.create({
     baseURL: 'http://localhost:9090',  // 注意！！ 这里是全局统一加上了 后端接口前缀 前缀，后端必须进行跨域配置！
@@ -9,6 +10,8 @@ const request = axios.create({
 // 可以自请求发送前对请求做一些处理
 // 比如统一加token，对请求参数统一加密
 request.interceptors.request.use(config => {
+
+
     config.headers['Content-Type'] = 'application/json';
 
     // config.headers['token'] = user.token;  // 设置请求头
@@ -22,6 +25,7 @@ request.interceptors.request.use(config => {
 request.interceptors.response.use(
     response => {
         let res = response.data;
+
         // 如果是返回的文件
         if (response.config.responseType === 'blob') {
             return res
